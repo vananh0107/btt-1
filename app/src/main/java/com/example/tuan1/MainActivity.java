@@ -1,5 +1,6 @@
 package com.example.tuan1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.tuan1.week2.SecondWeekActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,12 +33,17 @@ public class MainActivity extends AppCompatActivity {
         btnCalc = findViewById(R.id.btn1);
         tvSum = findViewById(R.id.tvSum);
 
-        btnCalc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int sum = Integer.parseInt(edt1.getText().toString()) + Integer.parseInt(edt2.getText().toString());
-                tvSum.setText(String.valueOf(sum));
-            }
+        btnCalc.setOnClickListener(v->{
+            int num1 = Integer.parseInt(edt1.getText().toString());
+            int num2 = Integer.parseInt(edt2.getText().toString());
+            int sum = num1 + num2;
+
+            Intent intent = new Intent(this, SecondWeekActivity.class);
+            intent.putExtra("num1", num1);
+            intent.putExtra("num2", num2);
+            intent.putExtra("sum", sum);
+            startActivity(intent);
         });
+
     }
 }
