@@ -30,14 +30,13 @@ public class Week5Activity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycleViewW4);
 
-        apiUser = RetrofitClient.getInstance("http://192.168.0.102:3000/api/user/")
+        apiUser = RetrofitClient.getInstance("http://192.168.0.103:3000/api/user/")
                 .create(ApiUser.class);
         compositeDisposable.add(apiUser.getAllUser().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(
                         data ->{
                             users = data;
-                            adapter = new UserAdapter(users);
-                            recyclerView.setAdapter(adapter);
+                            adapter = new UserAdapter(users, getApplicationContext());                            recyclerView.setAdapter(adapter);
                             recyclerView.setHasFixedSize(true);
                             recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

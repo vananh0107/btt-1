@@ -1,12 +1,14 @@
 package com.example.tuan1.week5;
 import android.view.LayoutInflater;
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.bumptech.glide.Glide;
 import com.example.tuan1.R;
 
 
@@ -14,9 +16,10 @@ import java.util.List;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 
     private final List<User> users;
-
-    public UserAdapter(List<User> users) {
+    private final Context context;
+    public UserAdapter(List<User> users, Context context) {
         this.users = users;
+        this.context = context;
     }
 
     @NonNull
@@ -34,9 +37,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         holder.tvRole.setText(user.getRole());
         holder.tvEmail.setText(user.getEmail());
         holder.tvBirthday.setText(user.getBirthDay());
-
-
-
+        Glide.with(context).load(user.getImage()).into(holder.tvImage);
     }
 
     @Override
@@ -49,14 +50,16 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     public static class UserViewHolder extends RecyclerView.ViewHolder {
         TextView tvId, tvBirthday, tvFullName, tvRole, tvEmail;
+        ImageView tvImage;
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            tvImage = itemView.findViewById(R.id.tvImage);
             tvId = itemView.findViewById(R.id.tvId);
             tvFullName = itemView.findViewById(R.id.tvFullName);
             tvBirthday = itemView.findViewById(R.id.tvBirthday);
             tvRole = itemView.findViewById(R.id.tvRole);
             tvEmail = itemView.findViewById(R.id.tvEmail);
+            tvImage = itemView.findViewById(R.id.tvImage);
         }
     }
 }
